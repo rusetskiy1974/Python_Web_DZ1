@@ -7,8 +7,9 @@ from user_assistant.console.table_format.notes_table import note_titles, get_not
 
 def add_tags(notes: Notes, storage: Storage):
     Console.print_tip('Press “Enter” with empty value to skip')
+    prompts = list(el.id.value.casefold().strip() for el in  notes.data.values())
     while True:
-        note_id = input_value('note ID', str, True)
+        note_id = input_value('note ID', str, True, prompts=prompts)
         if not note_id:
             return
         else:
