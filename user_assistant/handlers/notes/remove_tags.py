@@ -6,7 +6,8 @@ from user_assistant.handlers.input_value import input_value
 from user_assistant.console.table_format.notes_table import note_titles, get_notes_row
 
 def remove_tags(notes: Notes, storage: Storage):
-    note_id = input_value('note ID', str)
+    prompts = list(el.id.value.casefold().strip() for el in  notes.data.values())
+    note_id = input_value('note ID', str, prompts=prompts)
     note = notes.find(note_id)
 
     if note is None:
